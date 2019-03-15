@@ -1,26 +1,27 @@
 jQuery( document ).ready(function($) {
-
+	
 // Mobile Nav Menu
 var hamburgerButton = $('.hamburger-button');
-var body = $('body');
+var $body = $('body');
 var navMobile = $('nav#mobile-site-navigation');
+
 $(hamburgerButton).on('click', function(event){
 		event.preventDefault();		
 		$(this).toggleClass('active');
-		$(body).toggleClass('active');
+		$($body).toggleClass('active');
 		$(navMobile).fadeToggle(200);
 });
 $(window).on('resize', function () {
     if ($(this).width() >= 768) {
         //do code for less than 480px wide 
 		$(hamburgerButton).removeClass('active');
-		$(body).removeClass('active');
+		$($body).removeClass('active');
 		$(navMobile).fadeOut(200);
     }
 }).trigger('resize');
 
 
-if ($("body").hasClass("home")) {
+if ($($body).hasClass("home")) {
 // 		Featured Properties Slider
 	$('#featured-properties-loop-wrap').slick({
 		nextArrow: '<button class="slick-next"><span class="blue-circle"><span class="line line-1"></span><span class="line line-2"></span></span></button>',
@@ -61,7 +62,7 @@ if ($("body").hasClass("home")) {
 		
 }	
 
-if ($("body").hasClass("page-template-page-template-about")) {
+if ($($body).hasClass("page-template-page-template-about")) {
 // 		Testimonial Slider
 		$('#testimonial-cards-wrap').slick({
 			nextArrow: '<button class="slick-next"><span class="blue-circle"><span class="line line-1"></span><span class="line line-2"></span></span></button>',
@@ -98,7 +99,7 @@ if ($("body").hasClass("page-template-page-template-about")) {
 		});	
 }
 
-if ($("body").hasClass("single-listings")) {
+if ($($body).hasClass("single-listings")) {
 // 		Single Listing Gallery Slider
 	if ( $('#listing-slider').length ) {
         var $slider = $('#listing-slider')
@@ -346,7 +347,7 @@ if ($("body").hasClass("single-listings")) {
 
 }
 
-if ($("body").hasClass("page-template-page-template-contact")) {
+if ($($body).hasClass("page-template-page-template-contact")) {
 // 		Google Map
 
 (function($) {
@@ -520,7 +521,7 @@ if ($("body").hasClass("page-template-page-template-contact")) {
 })(jQuery);	
 }
 
-if ($("body").hasClass("search")) {
+if ($($body).hasClass("search")) {
 // 	Filter Button Search Queries
 	$('#pre-archive-filter-wrap').on('click', '#sale-filter', function() {
 		var url=window.location.href,
@@ -566,7 +567,7 @@ if ($("body").hasClass("search")) {
 	});
 
 
-	if (!$("body").hasClass("paged")) {	
+	if (!$($body).hasClass("paged")) {	
 		
 		$('#listing-filter-wrap').on('click', 'li.filter-all', function() {
 			var url=window.location.pathname,
@@ -638,7 +639,7 @@ if ($("body").hasClass("search")) {
 	
 	}
 	
-	if ($("body").hasClass("paged")) {
+	if ($($body).hasClass("paged")) {
 		
 		$('#listing-filter-wrap').on('click', 'li.filter-all', function() {
 			var url=window.location.pathname,
@@ -672,18 +673,6 @@ if ($("body").hasClass("search")) {
 		    newUrl+=newParam;
 		    window.location.href =newUrl;
 		});	
-	/*
-		$('#pre-archive-filter-wrap').on('click', '#sold-leased-filter', function() {
-			var url=window.location.href,
-		    separator = (url.indexOf("?")===-1)?"?":"&",
-		    newParam=separator + "availability=sold-leased";
-		    oldParam=separator + "availability=for-sale,for-sale-or-lease";
-		    oldParam2=separator + "availability=for-lease,for-sale-or-lease";
-		    newUrl=url.replace(oldParam,"").replace(oldParam2,"").replace(newParam,"");
-		    newUrl+=newParam;
-		    window.location.href =newUrl;
-		});
-	*/
 	
 		$(function() {	
 			if(window.location.href.indexOf("for-sale") > 0) {
@@ -696,11 +685,6 @@ if ($("body").hasClass("search")) {
 		});
 						
 	}
-	
-							
-
-
-	
 	
 
 	// Light Background for active filter buttons
@@ -776,95 +760,7 @@ if ($("body").hasClass("search")) {
 		}
 	});	
 }
-	
-/*
-	var availabilitySaleButton = document.getElementById('sale-filter');
-	var availabilityLeaseButton = document.getElementById('lease-filter');
 
-	var portfolioPostsContainer = document.getElementById('archive-loop-wrap');
-						
-	
-	if (availabilitySaleButton) {
-		availabilitySaleButton.addEventListener( 'click', function(){
-			    
-			var ourRequest = new XMLHttpRequest();
-			ourRequest.open('GET', 'http://karmar.local/wp-json/wp/v2/property_listings?per_page=4&filter[meta_key]=availability&filter[meta_compare]=&filter[meta_value]=sale');
-			ourRequest.onload = function() {
-			  if (ourRequest.status >= 200 && ourRequest.status < 400) {
-		    var Data = JSON.parse(ourRequest.responseText);
-		    createHTML(Data);
-		    console.log(Data);
-		  	} else {
-		    console.log("We connected to the server, but it returned an error.");
-			  }
-			};
-			
-			ourRequest.onerror = function() {
-			  console.log("Connection error");
-			};
-			
-			ourRequest.send();
-			});
-	}
-
-	if (availabilityLeaseButton) {
-		availabilityLeaseButton.addEventListener( 'click', function(){
-			    
-			var ourRequest = new XMLHttpRequest();
-			ourRequest.open('GET', 'http://karmar.local/wp-json/wp/v2/property_listings?per_page=4&filter[meta_key]=availability&filter[meta_compare]=&filter[meta_value]=lease');
-			ourRequest.onload = function() {
-			  if (ourRequest.status >= 200 && ourRequest.status < 400) {
-		    var Data = JSON.parse(ourRequest.responseText);
-		    createHTML(Data);
-		    console.log(Data);
-		  	} else {
-		    console.log("We connected to the server, but it returned an error.");
-			  }
-			};
-			
-			ourRequest.onerror = function() {
-			  console.log("Connection error");
-			};
-			
-			ourRequest.send();
-			});
-	}
-	
-	function createHTML(postsData) {
-		var ourHTMLString = '';
-		for (i = 0; i < postsData.length; i++) {
-			ourHTMLString +=
-				'<div class="property_listings">' +
-					'<div class="listing-thumb-wrap archive-preview-third">' +
-						'<img src="' +
-						postsData[i].better_featured_image.media_details.sizes.propertyarchivethumb.source_url +
-						'"/>' +
-					'</div>' +
-
-					'<div class="white-copy-wrap archive-preview-third">' +
-						'<p class="white-box-cat archive-white-title">' + postsData[i].categories_names + '</p>' +
-						'<p class="archive-description">' + postsData[i].acf.description + '</p>' +
-						'<p class="archive-address-title archive-white-title">Address</p>' +
-						'<p class="archive-address">' + postsData[i].acf.address + '</p>' +
-						'<a class="work-permalink yellow-button" href="/property_listings/' +
-							postsData[i].slug +
-						'">SHOW MORE</a>' +
-					'</div>' +
-					
-					'<div class="blue-copy-wrap archive-preview-third">' +
-						'<p class="archive-blue-title">' + postsData[i].acf.area.unit_label + '</p>' +
-						'<p>' + postsData[i].acf.area.unit_number + '</p>' +
-						'<p>Availability</p>' +
-						'<p>' + postsData[i].acf.availability.label + '</p>' +
-
-					'</div>' +
-					
-				'</div>';
-
-		}
-		portfolioPostsContainer.innerHTML = ourHTMLString;
-	}
-*/
 
 	
 	

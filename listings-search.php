@@ -16,16 +16,20 @@ get_header();
 		<div id="archive-filter-wrap" class="ow-bg">
 			<div class="wrap-1175">
 				
-			<!-- 		Listing Filter -->
-					<?php if( have_rows('listing_filter', 'option') ):?>
-						<?php while ( have_rows('listing_filter', 'option') ) : the_row();?>
-						<div id="pre-archive-filter-wrap">
-								<form method="get" id="searchform" class="pre-filter-element" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-									
-									
-									 <div>   
-    <h3>Search Listings</h3>
-    <form role="search" action="<?php echo site_url('/'); ?>" method="get" id="searchform">
+			<script>
+				var autofillterms = [<?php echo the_field('terms', 'option');?>]
+			</script>		
+				
+	<!-- 		Listing Filter -->
+			<?php if( have_rows('listing_filter', 'option') ):?>
+				<?php while ( have_rows('listing_filter', 'option') ) : the_row();?>
+				<div id="pre-archive-filter-wrap">
+						<form method="get" id="searchform" class="pre-filter-element" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<div class="autocomplete">
+								<input id="searchforminput" type="text" class="field" data-swplive="true" name="s" id="s" autocomplete="off" placeholder="<?php esc_attr_e( 'Locations', 'karmar' ); ?>" />
+							</div>
+							<button type="submit" class="submit" id="searchsubmit"><i class="fas fa-search"></i></button>
+						</form>
     <input type="text" name="s" placeholder="Search Products"/>
     <input type="hidden" name="post_type" value="products" /> <!-- // hidden 'products' value -->
     <input type="submit" alt="Search" value="Search" />

@@ -15,31 +15,34 @@ get_header();
 	<div id="primary" class="content-area">
 		<div id="archive-filter-wrap" class="ow-bg">
 			<div class="wrap-1175">
+	
+			<script>
+				var autofillterms = [<?php echo the_field('terms', 'option');?>]
+			</script>		
 				
-			<!-- 		Listing Filter -->
-					<?php if( have_rows('listing_filter', 'option') ):?>
-						<?php while ( have_rows('listing_filter', 'option') ) : the_row();?>
-						<div id="pre-archive-filter-wrap">
-								<form method="get" id="searchform" class="pre-filter-element" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-									<input type="text" class="field" name="s" id="s" placeholder="<?php esc_attr_e( 'Locations', 'karmar' ); ?>" />
-<!-- 									<?php echo do_shortcode('[wpdreams_ajaxsearchlite]'); ?> -->
-
-									
-									<button type="submit" class="submit" id="searchsubmit"><i class="fas fa-search"></i></button>
-								</form>
+	<!-- 		Listing Filter -->
+			<?php if( have_rows('listing_filter', 'option') ):?>
+				<?php while ( have_rows('listing_filter', 'option') ) : the_row();?>
+				<div id="pre-archive-filter-wrap">
+						<form method="get" id="searchform" class="pre-filter-element" autocomplete="off" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<div class="autocomplete">
+								<input id="searchforminput" type="text" class="field" data-swplive="true" name="s" id="s" autocomplete="off" placeholder="<?php esc_attr_e( 'Locations', 'karmar' ); ?>" />
+							</div>
+							<button type="submit" class="submit" id="searchsubmit"><i class="fas fa-search"></i></button>
+						</form>
 							<button id="sale-filter" class="pre-filter-element sl-button">For Sale</button>
 							<button id="lease-filter" class="pre-filter-element sl-button">For Lease</button>
 							<button id="sold-leased-filter" class="pre-filter-element sl-button">Sold / Leased</button>
-
+							
 						
 						<script>
 						jQuery( document ).ready(function($) {
 							$('#pre-archive-filter-wrap').on('click', '#sale-filter', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&availability=for-sale,for-sale-or-lease";
-							    oldParam=separator + "s=all&availability=for-lease,for-sale-or-lease";
-							    oldParam2=separator + "s=all&availability=sold-leased";
+							    newParam=separator + "s=availability=for-sale,for-sale-or-lease";
+							    oldParam=separator + "s=availability=for-lease,for-sale-or-lease";
+							    oldParam2=separator + "s=availability=sold-leased";
 							    newUrl=url.replace(oldParam,"").replace(oldParam2,"").replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -47,9 +50,9 @@ get_header();
 							$('#pre-archive-filter-wrap').on('click', '#lease-filter', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&availability=for-lease,for-sale-or-lease";
-							    oldParam=separator + "s=all&availability=for-sale,for-sale-or-lease";
-							    oldParam2=separator + "s=all&availability=sold-leased";
+							    newParam=separator + "s=availability=for-lease,for-sale-or-lease";
+							    oldParam=separator + "s=availability=for-sale,for-sale-or-lease";
+							    oldParam2=separator + "s=availability=sold-leased";
 							    newUrl=url.replace(oldParam,"").replace(oldParam2,"").replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -57,9 +60,9 @@ get_header();
 							$('#pre-archive-filter-wrap').on('click', '#sold-leased-filter', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&availability=sold-leased";
-							    oldParam=separator + "s=all&availability=for-sale,for-sale-or-lease";
-							    oldParam2=separator + "s=all&availability=for-lease,for-sale-or-lease";
+							    newParam=separator + "s=availability=sold-leased";
+							    oldParam=separator + "s=availability=for-sale,for-sale-or-lease";
+							    oldParam2=separator + "s=availability=for-lease,for-sale-or-lease";
 							    newUrl=url.replace(oldParam,"").replace(oldParam2,"").replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -71,15 +74,16 @@ get_header();
 							$('#listing-filter-wrap').on('click', 'li.filter-retail', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&property_type=retail";
-							    newUrl=url.replace(newParam,"");
+							    newParam=separator + "s=property_type=retail";
+							    oldParam=separator + "/listings/";
+							    newUrl=url.replace(oldParam,"").replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
 							});
 							$('#listing-filter-wrap').on('click', 'li.filter-investment', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&property_type=investment";
+							    newParam=separator + "s=property_type=investment";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -87,7 +91,7 @@ get_header();
 							$('#listing-filter-wrap').on('click', 'li.filter-office', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&property_type=office";
+							    newParam=separator + "s=property_type=office";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -95,7 +99,7 @@ get_header();
 							$('#listing-filter-wrap').on('click', 'li.filter-industrial', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&property_type=industrial";
+							    newParam=separator + "s=property_type=industrial";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -103,7 +107,7 @@ get_header();
 							$('#listing-filter-wrap').on('click', 'li.filter-land', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&property_type=land";
+							    newParam=separator + "s=property_type=land";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -111,7 +115,7 @@ get_header();
 							$('#listing-filter-wrap').on('click', 'li.filter-mixed-use', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&property_type=mixed-use";
+							    newParam=separator + "s=property_type=mixed-use";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -119,7 +123,7 @@ get_header();
 							$('#listing-filter-wrap').on('click', 'li.filter-multi-family', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "s=all&property_type=multi-family";
+							    newParam=separator + "s=property_type=multi-family";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;

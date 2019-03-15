@@ -11,6 +11,9 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div id="listing-header">
+		<?php
+			echo get_the_tag_list('<p class="hidden-tags">Tags: ',', ','</p>');
+		?>
 		<div class="listing-slider-wrap">
 			<div id="listing-slider">
 				<?php 

@@ -20,6 +20,9 @@
 			</div>
 			
 			<div class="white-copy-wrap archive-preview-third">
+				<?php
+				echo get_the_tag_list('<p class="hidden-tags">Tags: ',', ','</p>');
+				?>
 				<p class="archive-description"><?php the_field('description');?></p>
 				<p class="archive-address-title archive-white-title">Address</p>
 				<p class="archive-address"><?php the_field('address');?></p>

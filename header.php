@@ -77,7 +77,7 @@
 			<?php while ( have_rows('banner') ) : the_row();?>
 				<?php
 					$imgID = get_sub_field('background_image');
-					$imgSize = "full"; // (thumbnail, medium, large, full or custom size)
+					$imgSize = "banner"; // (thumbnail, medium, large, full or custom size)
 					$imgArr = wp_get_attachment_image_src( $imgID, $imgSize );
 				?>
 				<?php 

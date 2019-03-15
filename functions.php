@@ -139,14 +139,20 @@ function karmar_scripts() {
 	
 	wp_enqueue_script( 'karmar-scripts', get_template_directory_uri() . '/js/scripts.js', array(), '20151215', true );
 	
+	if (is_archive() || is_search()){
+		wp_enqueue_script( 'autosuggest-scripts', get_template_directory_uri() . '/js/autosuggest.js', array(), '20151215', true );
+	}
+	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-	
-
-	
 }
 add_action( 'wp_enqueue_scripts', 'karmar_scripts' );
+
+wp_localize_script( 'karmar-scripts', 'acf_vars', array(
+		'autofillterms' => get_sub_field( 'single_term', 'option' ),
+	)
+);
 
 /**
  * Implement the Custom Header feature.
@@ -185,6 +191,8 @@ add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
 // CUSTOM IMAGE SIZES
 add_action( 'after_setup_theme', 'wpdocs_theme_setup' );
 function wpdocs_theme_setup() {
+add_image_size( 'banner', 1800, 9999, false );
+add_image_size( 'about-page-image', 668, 852, true );
 add_image_size( 'propertyarchivethumb', 596, 455, true );
 add_image_size( 'featured-property-archive-thumb', 354, 276, true );
 add_image_size( 'property-slide', 862, 439, true );
@@ -435,3 +443,7 @@ add_action( 'admin_menu', 'revcon_change_post_label' );
 add_action( 'init', 'revcon_change_post_object' );
 
 
+add_filter( 'relevanssi_exact_match_bonus', 'rlv_adjust_bonus' );
+function rlv_adjust_bonus( $bonus ) {
+	return array( 'title' => 10, 'content' => 1, 'tag' => 50 );
+}

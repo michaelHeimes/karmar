@@ -905,7 +905,7 @@ object {
 	display: none !important;
 }
 
-header.single-news-entry-header.news-no-img-header {
+header.single-news-entry-header.news-no-img-header, .hidden-tags {
 	position: absolute;
     clip: rect(1px, 1px, 1px, 1px);
 }
@@ -1239,6 +1239,13 @@ form#searchform input:-moz-placeholder { /* Firefox 18- */
   color: #2b2b2b;
 }
 
+.awesomplete mark {
+    background: 0 0;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2b2b2b;
+}
+
 .sl-button, .sl-button a:visited, .sl-button a:hover {
 	color: #2b2b2b;
 	text-align: center;
@@ -1246,9 +1253,74 @@ form#searchform input:-moz-placeholder { /* Firefox 18- */
 }
 
 button#searchsubmit {
-    border-left: 0px;
-    width: 52px;
+	border-left: 0px;
+	width: 52px;
 }
+
+.autocomplete {
+	position: relative;
+	display: inline-block;
+}
+
+input {
+	border: 1px solid transparent;
+	background-color: #fff;
+	padding: 10px;
+	font-size: 16px;
+}
+
+input[type=text] {
+	background-color: #fff;
+	width: 100%;
+}
+
+input[type=submit] {
+	background-color: DodgerBlue;
+	color: #fff;
+}
+
+.autocomplete-items {
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	top: 100%;
+	left: 0;
+	right: 0;
+}
+
+.autocomplete-items div {
+	color: #2b2b2b;
+	font-size: 1rem;
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff; 
+	border-bottom: 1px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+	background-color: #fcc11f; 
+}
+
+.autocomplete-active {
+	background-color: #fcc11f !important; 
+}
+
+/*
+.searchwp-live-search-results {
+	border-radius: 0 !important;
+	border: 1px solid !important;
+    border-color: #bbb !important;
+	-webkit-box-shadow: 3px 3px 7px 0px rgba(3,25,61,0.27) !important;
+    box-shadow: 3px 3px 7px 0px rgba(3,25,61,0.27) !important;
+}
+
+.searchwp-live-search-result a {
+	text-decoration: none;
+	white-space: normal !important;
+}
+*/
 
 @media screen and (min-width: 750px) {
 	#pre-archive-filter-wrap {
@@ -1387,8 +1459,12 @@ button#searchsubmit {
 .archive.multi-family-archive #listing-filter-wrap li.filter-multi-family,
 .archive.sold-leased-archive #listing-filter-wrap li.filter-sold-leased, 
 */
-.all-listings #listing-filter-wrap li.filter-all, #listing-filter-wrap li.blue-button-clicked {
+.archive #listing-filter-wrap li.filter-all, #listing-filter-wrap li.blue-button-clicked {
 	background: #b1b9c5;
+}
+
+.archive.search #listing-filter-wrap li.filter-all {
+    background: #092953;
 }
 
 
@@ -3051,7 +3127,7 @@ a.team-email {
 }
 
 .page-template-page-template-contact .wpcf7 .wpcf7-form-control-wrap input, .page-template-page-template-list .wpcf7 .wpcf7-form-control-wrap input {
-	margin-bottom: 60px;
+	margin-bottom: 53px;
 }
 
 .page-template-page-template-contact .wpcf7 input:-webkit-autofill,
@@ -3068,7 +3144,11 @@ a.team-email {
     color: #fff !important;	
 }
 
-.page-template-page-template-contact .wpcf7 .wpcf7-form-control-wrap input, .page-template-page-template-contact .wpcf7 textarea, .page-template-page-template-list .wpcf7 .wpcf7-form-control-wrap input, .page-template-page-template-list .wpcf7 textarea {
+.page-template-page-template-contact .wpcf7 .wpcf7-form-control-wrap input,
+.page-template-page-template-contact .wpcf7 textarea,
+.page-template-page-template-list .wpcf7 .wpcf7-form-control-wrap input,
+.page-template-page-template-list .wpcf7 textarea {
+	width: 100%;
     background: #fff;
     color: #092953;
     font-size: 23px;
