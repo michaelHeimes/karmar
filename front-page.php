@@ -70,7 +70,7 @@ jQuery( document ).ready(function($) {
 		$('#listing-filter-wrap').on('click', 'li.filter-retail', function() {
 		var url=window.location.href,
 	    separator = (url.indexOf("?s")===-1)?"listings/?":"&",
-	    newParam=separator + "s=all&property_type=retail";
+	    newParam=separator + "s=retail";
 	    newUrl=url.replace(newParam,"");
 	    newUrl+=newParam;
 	    window.location.href =newUrl;
@@ -78,7 +78,7 @@ jQuery( document ).ready(function($) {
 	$('#listing-filter-wrap').on('click', 'li.filter-investment', function() {
 		var url=window.location.href,
 	    separator = (url.indexOf("?s")===-1)?"listings/?":"&",
-	    newParam=separator + "s=all&property_type=investment";
+	    newParam=separator + "s=investment";
 	    newUrl=url.replace(newParam,"");
 	    newUrl+=newParam;
 	    window.location.href =newUrl;
@@ -86,7 +86,7 @@ jQuery( document ).ready(function($) {
 	$('#listing-filter-wrap').on('click', 'li.filter-office', function() {
 		var url=window.location.href,
 	    separator = (url.indexOf("?s")===-1)?"listings/?":"&",
-	    newParam=separator + "s=all&property_type=office";
+	    newParam=separator + "s=office";
 	    newUrl=url.replace(newParam,"");
 	    newUrl+=newParam;
 	    window.location.href =newUrl;
@@ -94,7 +94,7 @@ jQuery( document ).ready(function($) {
 	$('#listing-filter-wrap').on('click', 'li.filter-industrial', function() {
 		var url=window.location.href,
 	    separator = (url.indexOf("?s")===-1)?"listings/?":"&",
-	    newParam=separator + "s=all&property_type=industrial";
+	    newParam=separator + "s=industrial";
 	    newUrl=url.replace(newParam,"");
 	    newUrl+=newParam;
 	    window.location.href =newUrl;
@@ -102,7 +102,7 @@ jQuery( document ).ready(function($) {
 	$('#listing-filter-wrap').on('click', 'li.filter-land', function() {
 		var url=window.location.href,
 	    separator = (url.indexOf("?s")===-1)?"listings/?":"&",
-	    newParam=separator + "s=all&property_type=land";
+	    newParam=separator + "s=land";
 	    newUrl=url.replace(newParam,"");
 	    newUrl+=newParam;
 	    window.location.href =newUrl;
@@ -110,7 +110,7 @@ jQuery( document ).ready(function($) {
 	$('#listing-filter-wrap').on('click', 'li.filter-mixed-use', function() {
 		var url=window.location.href,
 	    separator = (url.indexOf("?s")===-1)?"listings/?":"&",
-	    newParam=separator + "s=all&property_type=mixed-use";
+	    newParam=separator + "s=mixed-use";
 	    newUrl=url.replace(newParam,"");
 	    newUrl+=newParam;
 	    window.location.href =newUrl;
@@ -118,7 +118,7 @@ jQuery( document ).ready(function($) {
 	$('#listing-filter-wrap').on('click', 'li.filter-multi-family', function() {
 		var url=window.location.href,
 	    separator = (url.indexOf("?s")===-1)?"listings/?":"&",
-	    newParam=separator + "s=all&property_type=multi-family";
+	    newParam=separator + "s=multi-family";
 	    newUrl=url.replace(newParam,"");
 	    newUrl+=newParam;
 	    window.location.href =newUrl;

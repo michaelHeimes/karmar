@@ -87,7 +87,7 @@
 							$('#listing-filter-wrap').on('click', 'li.filter-retail', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "property_type=retail";
+							    newParam=separator + "retail";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -95,7 +95,7 @@
 							$('#listing-filter-wrap').on('click', 'li.filter-investment', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "property_type=investment";
+							    newParam=separator + "investment";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -103,7 +103,7 @@
 							$('#listing-filter-wrap').on('click', 'li.filter-office', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "property_type=office";
+							    newParam=separator + "office";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -111,7 +111,7 @@
 							$('#listing-filter-wrap').on('click', 'li.filter-industrial', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "property_type=industrial";
+							    newParam=separator + "industrial";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -119,7 +119,7 @@
 							$('#listing-filter-wrap').on('click', 'li.filter-land', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "property_type=land";
+							    newParam=separator + "land";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -127,7 +127,7 @@
 							$('#listing-filter-wrap').on('click', 'li.filter-mixed-use', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "property_type=mixed-use";
+							    newParam=separator + "mixed-use";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;
@@ -135,7 +135,7 @@
 							$('#listing-filter-wrap').on('click', 'li.filter-multi-family', function() {
 								var url=window.location.href,
 							    separator = (url.indexOf("?s")===-1)?"?":"&",
-							    newParam=separator + "property_type=multi-family";
+							    newParam=separator + "multi-family";
 							    newUrl=url.replace(newParam,"");
 							    newUrl+=newParam;
 							    window.location.href =newUrl;

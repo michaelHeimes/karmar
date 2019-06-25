@@ -259,19 +259,29 @@ function is_post_type($type){
     return false;
 }
 
+
 // Allow CPT Category Archives
-add_filter('pre_get_posts', 'query_post_type');
-function query_post_type($query) {
-  if( is_category() ) {
-    $post_type = get_query_var('post_type');
-    if($post_type)
-        $post_type = $post_type;
-    else
-        $post_type = array('nav_menu_item', 'post', 'listings'); // don't forget nav_menu_item to allow menus to work!
-    $query->set('post_type',$post_type);
-    return $query;
-    }
+function my_cptui_add_post_types_to_archives( $query ) {
+	// We do not want unintended consequences.
+	if ( is_admin() || ! $query->is_main_query() ) {
+		return;    
+	}
+
+	if ( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
+		$cptui_post_types = cptui_get_post_type_slugs();
+
+		$query->set(
+			'post_type',
+			array_merge(
+				array( 'post' ),
+				$cptui_post_types
+			)
+		);
+	}
 }
+add_filter( 'pre_get_posts', 'my_cptui_add_post_types_to_archives' );
+
+
 
 // Get query for Sale and Lease buttons
 
@@ -302,6 +312,30 @@ function my_pre_get_posts( $query ) {
 }
 add_action('pre_get_posts', 'my_pre_get_posts');
 */
+
+
+/*
+add_filter('query_vars', 'relevanssi_qvs');
+function relevanssi_qvs($qv) {
+    $qv[] = 'availability';
+    return $qv;
+}
+
+add_filter('relevanssi_hits_filter', 'relevanssi_availability_filter');
+function relevanssi_availability_filter($hits) {
+    global $wp_query;
+    if (isset($wp_query->query_vars['availability'])) {
+    	$correct_availability = array();
+    	foreach ($hits[0] as $hit) {
+    		$availability = get_post_meta($hit->ID, 'availability', true);
+    		if ($availability == $wp_query->query_vars['availability']) $correct_availability[] = $hit;
+    	}
+    	$hits[0] = $correct_availability;
+    }
+    return $hits;
+}
+*/
+
 
 
 // Numbered Post Navigation
@@ -443,7 +477,171 @@ add_action( 'admin_menu', 'revcon_change_post_label' );
 add_action( 'init', 'revcon_change_post_object' );
 
 
+add_filter('relevanssi_index_custom_fields', 'rlv_skip_custom_fields');
+function rlv_skip_custom_fields($custom_fields) {
+  $unwanted_fields = array('features', 'terms', 'description' , 'description-single-listing');
+  $custom_fields = array_diff($custom_fields, $unwanted_fields);
+  return $custom_fields;
+}
+
+// Relevanssi Search Weight Hooks
 add_filter( 'relevanssi_exact_match_bonus', 'rlv_adjust_bonus' );
 function rlv_adjust_bonus( $bonus ) {
-	return array( 'title' => 10, 'content' => 1, 'tag' => 50 );
+	return array( 'title' => 1, 'content' => 0, 'tag' => 5000000000000, 'category' => 500000000000, 'property_type' => 50000, 'availability' => 50000  );
 }
+
+/*
+add_filter( 'relevanssi_match', 'rlv_boost_one_term' );
+function rlv_boost_one_term( $match ) {
+	if ( has_term( 'delaware', 'post_tag', $match->doc ) ) {
+		$match->weight = $match->weight * 4001;
+	}
+	return $match;
+}
+*/
+
+/*
+add_filter( 'relevanssi_match', 'rlv_boost_one_term2' );
+function rlv_boost_one_term2( $match ) {
+	if ( has_term( 'delaware-county', 'post_tag', $match->doc ) ) {
+		$match->weight = $match->weight * 40000000000;
+	}
+	return $match;
+}
+*/
+
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term3' );
+function rlv_boost_one_term3( $match ) {
+	if ( has_term( 'chesco', 'post_tag', $match->doc ) ) {
+		$match->weight = $match->weight * 40000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term3_1' );
+function rlv_boost_one_term3_1( $match ) {
+	if ( has_term( 'delco', 'post_tag', $match->doc ) ) {
+		$match->weight = $match->weight * 40000000000;
+	}
+	return $match;
+}
+
+/*
+add_filter( 'relevanssi_match', 'rlv_boost_one_term3_2' );
+function rlv_boost_one_term3_2( $match ) {
+	if ( has_term( 'delaware-state', 'post_tag', $match->doc ) ) {
+		$match->weight = $match->weight * 40000000000;
+	}
+	return $match;
+}
+*/
+
+/*
+add_filter( 'relevanssi_match', 'rlv_boost_one_term3_1' );
+function rlv_boost_one_term3_1( $match ) {
+	if ( has_term( 'county', 'category', $match->doc ) ) {
+		$match->weight = $match->weight / 400000;
+	}
+	return $match;
+}
+*/
+
+/*
+add_filter( 'relevanssi_match', 'rlv_boost_one_term4' );
+function rlv_boost_one_term4( $match ) {
+	if ( has_term( 'chester', 'post_tag', $match->doc ) ) {
+		$match->weight = $match->weight * 4000;
+	}
+	return $match;
+}
+*/
+
+add_filter( 'relevanssi_match', 'rlv_boost_all_terms' );
+function rlv_boost_all_terms( $match ) {
+	if ( has_term( '', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 500000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_all_terms3' );
+function rlv_boost_all_terms3( $match ) {
+	if ( has_term( '', 'availability', $match->doc ) ) {
+		$match->weight = $match->weight * 500000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term5' );
+function rlv_boost_one_term5( $match ) {
+	if ( has_term( 'retail', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term6' );
+function rlv_boost_one_term6( $match ) {
+	if ( has_term( 'investment', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term7' );
+function rlv_boost_one_term7( $match ) {
+	if ( has_term( 'office', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term8' );
+function rlv_boost_one_term8( $match ) {
+	if ( has_term( 'industrial', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term9' );
+function rlv_boost_one_term9( $match ) {
+	if ( has_term( 'land', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term10' );
+function rlv_boost_one_term10( $match ) {
+	if ( has_term( 'mixed-use', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 4000000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term11' );
+function rlv_boost_one_term11( $match ) {
+	if ( has_term( 'multi-family', 'property_type', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term12' );
+function rlv_boost_one_term12( $match ) {
+	if ( has_term( 'for-sale', 'availability', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+
+add_filter( 'relevanssi_match', 'rlv_boost_one_term13' );
+function rlv_boost_one_term13( $match ) {
+	if ( has_term( 'for-lease', 'availability', $match->doc ) ) {
+		$match->weight = $match->weight * 400000000000000000000000000000000;
+	}
+	return $match;
+}
+

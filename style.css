@@ -344,6 +344,39 @@ button {
 	cursor: pointer;
 }
 
+/* Popup Form */
+#spu-1115 form.wpcf7-form {
+    text-align: center;
+}
+
+#spu-1115 .spu-content h2 {
+    margin-top: 0.5em !important;
+}
+
+#spu-1115 label {
+    color: #2b2b2b;
+    font-size: 16px;
+    font-size: 1.25rem;
+}
+
+#spu-1115 span.wpcf7-form-control-wrap {
+    margin-bottom: 19px;
+    display: inline-block;
+}
+
+#spu-1115 input.wpcf7-form-control.wpcf7-submit {
+    color: #092953;
+    background: #fcc11f;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 12px 20px 12px;
+    width: auto !important;
+    min-width: 121px;
+    font-weight: 600;
+    margin-right: -16px;
+}
+
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
@@ -1253,6 +1286,7 @@ form#searchform input:-moz-placeholder { /* Firefox 18- */
 }
 
 button#searchsubmit {
+	position: relative;
 	border-left: 0px;
 	width: 52px;
 }
@@ -1513,6 +1547,21 @@ input[type=submit] {
     width: 100%;
     text-align: center;
     margin-top: 0;
+}
+
+.search #listing-filter-wrap li.filter-all span {
+	position: relative;
+}
+
+.search #listing-filter-wrap li.filter-all span:after {
+    content: "(reset filters)";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    font-size: 0.8em;
 }
 
 .home #listing-filter-wrap li span {
@@ -2396,6 +2445,10 @@ button#ssc-r {
 	background: rgba(0,0,0,0.3);
 }
 
+.page-template-page-template-contact #banner-mask {
+	display: none;
+}
+
 @media screen and (min-width: 768px) {
 	#banner-text-wrap h2 {
 		font-size: 70px;
@@ -3084,28 +3137,36 @@ a.team-email {
 	padding: 0 20px;
 }
 
-.page-template-page-template-contact .wpcf7 {
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 {
 	padding-top: 31px;
 	padding-right: 20px;
 	padding-bottom: 91px;
 }
 
-.page-template-page-template-contact .wpcf7 h3, .page-template-page-template-contact .wpcf7 p, .page-template-page-template-contact .wpcf7 label, .page-template-page-template-list h3, .page-template-page-template-list .wpcf7 p, .page-template-page-template-list .wpcf7 label {
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 h3,
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 p,
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 label,
+.page-template-page-template-list h3,
+.page-template-page-template-list .wpcf7#wpcf7-f641-p65-o1 p,
+.page-template-page-template-list .wpcf7#wpcf7-f641-p65-o1 label {
     color: #fff;
 }
 
-.page-template-page-template-contact .wpcf7 h3, .page-template-page-template-list .wpcf7 h3 {
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 h3,
+.page-template-page-template-list .wpcf7#wpcf7-f641-p65-o1 h3 {
 	font-size: 30px;
 	line-height: 1;
 	margin-bottom: 0;
 }
 
-.page-template-page-template-contact .wpcf7 p#contact-intro, .page-template-page-template-list .wpcf7 p#contact-intro  {
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 p#contact-intro,
+.page-template-page-template-list .wpcf7#wpcf7-f641-p65-o1 p#contact-intro  {
 	margin-top: 0;
 	margin-bottom: 62px;
 }
 
-.page-template-page-template-contact .wpcf7 label, .page-template-page-template-list .wpcf7 label {
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 label,
+.page-template-page-template-list .wpcf7#wpcf7-f641-p65-o1 label {
     font-size: 19px;
 }
 
@@ -3126,14 +3187,15 @@ a.team-email {
 	margin-left: 0;
 }
 
-.page-template-page-template-contact .wpcf7 .wpcf7-form-control-wrap input, .page-template-page-template-list .wpcf7 .wpcf7-form-control-wrap input {
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 .wpcf7-form-control-wrap input,
+.page-template-page-template-list .wpcf7#wpcf7-f641-p65-o1 .wpcf7-form-control-wrap input {
 	margin-bottom: 53px;
 }
 
-.page-template-page-template-contact .wpcf7 input:-webkit-autofill,
-.page-template-page-template-contact .wpcf7 input:-webkit-autofill,
-.page-template-page-template-contact .wpcf7 input:-webkit-autofill:hover, 
-.page-template-page-template-contact .wpcf7 input:-webkit-autofill:focus,
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 input:-webkit-autofill,
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 input:-webkit-autofill,
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 input:-webkit-autofill:hover, 
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 input:-webkit-autofill:focus,
 .page-template-page-template-list .wpcf7 input:-webkit-autofill,
 .page-template-page-template-list .wpcf7 input:-webkit-autofill,
 .page-template-page-template-list .wpcf7 input:-webkit-autofill:hover, 
@@ -3144,8 +3206,8 @@ a.team-email {
     color: #fff !important;	
 }
 
-.page-template-page-template-contact .wpcf7 .wpcf7-form-control-wrap input,
-.page-template-page-template-contact .wpcf7 textarea,
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 .wpcf7-form-control-wrap input,
+.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 textarea,
 .page-template-page-template-list .wpcf7 .wpcf7-form-control-wrap input,
 .page-template-page-template-list .wpcf7 textarea {
 	width: 100%;
@@ -3224,7 +3286,7 @@ section#contact-right {
 }
 
 @media screen and (min-width: 768px) {
-	.page-template-page-template-contact .wpcf7 {
+	.page-template-page-template-contact .wpcf7#wpcf7-f641-p65-o1 {
 		padding-top: 31px;
 		padding-right: 87px;
 	}	
